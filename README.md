@@ -1,0 +1,63 @@
+![EncicloPunk Banner](./aindanaotem.png)
+
+---
+
+# EncicloPunk
+ 
+> O arquivo definitivo do Punk Rock. História, subculturas e Música num só lugar.
+ 
+![Status](https://img.shields.io/badge/Status:-Em%20Desenvolvimento-red?style=flat-square)
+![Stack](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS%20%7C%20Node.js%20%7C%20Express%20%7C%20MySQL-black?style=flat-square)
+ 
+---
+ 
+## Sobre o projeto
+ 
+O **EncicloPunk** nasceu da necessidade de ter um lugar exclusivo e aberto para documentar e celebrar o punk em todas as suas formas. Aqui você encontra a história do movimento, suas principais subculturas e um recomendador de músicas baseado no seu gosto.
+ 
+Sem algoritmo corporativo, sem paywalls. D.I.Y.
+ 
+---
+ 
+## Funcionalidades
+ 
+- **História** - Cronologia do punk do UK76 ao Brasil, com contexto político e cultural.
+- **Subculturas** - Hardcore, Oi!, Riot Grrrl, Crust, Street Punk e muito mais.
+- **Punk Brasileiro** - Garotos Podres, Inocentes, Ratos de Porão e a cena que merece mais atenção.
+- **Recomendador Musical** - Sugere bandas e álbuns com base no que você já curte.
+- **Estética & Arte** - A estética visual do movimento e artes da autora do site.
+---
+ 
+## </> | Linguagens e Tecnologias (Stack)
+ 
+| Camada | Tecnologia | Descrição |
+|--------|------------|----------|
+| Frontend | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) | HTML para o corpo do site, CSS para o design e Javascript para as funcionalidades|
+| Backend | ![Node.js](https://img.shields.io/badge/Node.js-538310?style=flat&logo=node.js&logoColor=white) + ![Express](https://img.shields.io/badge/Express.js-549212?style=flat&logo=express&logoColor=black) | Servidor que processará as requisições do site, como conexão com o Banco e criação de Gráficos |
+| Banco de dados |  ![MySQL](https://img.shields.io/badge/MySQL-7f7f7f?style=flat&logo=mysql&logoColor=white) | Armazenamento e manuseio de dados |
+
+---
+ 
+## 📁 Estrutura do projeto
+ 
+```
+enciclopunk/
+├── public/              # Arquivos estáticos (HTML, CSS, JS)
+│   ├── css/
+│   ├── js/
+│   └── assets/
+├── src/
+│   ├── routes/          # Rotas da API Express
+│   ├── controllers/     # Lógica de negócio
+│   ├── models/          # Modelos do banco de dados
+│   └── config/          # Configurações gerais
+├── database/
+│   └── migrations/      # Scripts SQL
+├── .env.example
+├── server.js
+└── package.json
+```
+ 
+---
+
+-----
