@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleautent.css">
+    <link rel="shortcut icon" href="img/logobranca.png" type="image/x-icon">
+    <title>Autentique-se | Enciclopunk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+    <body>
+ 
+<header>
+  <a href="index.html" class="logo">Enciclo<span>Punk</span></a>
+  <a href="index.html" class="back-link">← Voltar</a>
+</header>
+ 
+<main>
+ 
+  <!-- ESQUERDA -->
+  <div class="left-panel">
+    <div class="manifesto-tag">Acesso ao arquivo</div>
+    <h1 class="manifesto-title">
+      <span class="line-white">ENTRE NA RODA</span>
+    </h1>
+    <p class="manifesto-text">
+      Sem algoritmo corporativo. Sem anúncio. Sem regras.
+    </p>
+    
+  </div>
+ 
+  <!-- DIREITA -->
+  <div class="right-panel">
+    <div class="card-wrapper">
+      <div class="card-shadow-yellow"></div>
+      <div class="card-shadow-red"></div>
+      <div class="tape t1"></div>
+      <div class="tape t2"></div>
+      <div class="sticker s1">D.I.Y.</div>
+      <div class="sticker s2">Desde 1976 · No Future</div>
+ 
+      <div class="card">
+        <div class="stamp">PUNK<br>ROCK<br>★</div>
+        <div class="card-inner">
+          <div class="holes">
+            <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          </div>
+ 
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab('login')">Entrar</button>
+            <button class="tab" onclick="switchTab('cadastro')">Cadastrar</button>
+          </div>
+ 
+          <!-- ===== LOGIN ===== -->
+          <form class="form active" id="form-login" onsubmit="return false;">
+            <div class="field">
+              <label>E-mail</label>
+              <input type="email" placeholder="seu@email.com">
+            </div>
+            <div class="field">
+              <label>Senha</label>
+              <input type="password" placeholder="••••••••">
+            </div>
+            <a href="#" class="form-link">Esqueci minha senha</a>
+            <div class="check-row">
+              <input type="checkbox" id="lembrar">
+              <label class="check-text" for="lembrar">Lembrar de mim nessa máquina</label>
+            </div>
+            <button class="btn-submit">Entrar no Arquivo ✖</button>
+            <div class="sep"><span>ou</span></div>
+            <button class="btn-ghost" type="button">Continuar sem conta</button>
+            <p class="form-note">Nenhum dado vendido. Nunca.</p>
+          </form>
+ 
+          <!-- ===== CADASTRO ===== -->
+          <form class="form" id="form-cadastro" onsubmit="return false;">
+ 
+            <!-- Indicador de steps -->
+            <div class="step-indicator visible" id="step-indicator">
+              <div class="step-dot active" id="dot-1">1</div>
+              <div class="step-line"></div>
+              <div class="step-dot" id="dot-2">2</div>
+              <div class="step-line"></div>
+              <div class="step-dot" id="dot-3">3</div>
+              <span class="step-label" id="step-label">Conta</span>
+            </div>
+ 
+            <!-- STEP 1 — Dados básicos -->
+            <div class="step active" id="step-1">
+              <div class="field">
+                <label>Como te chamam</label>
+                <input type="text" placeholder="Seu nome ou apelido">
+              </div>
+              <div class="field">
+                <label>E-mail</label>
+                <input type="email" placeholder="seu@email.com">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label>Senha</label>
+                  <input type="password" placeholder="Mín. 8 caracteres">
+                </div>
+                <div class="field">
+                  <label>Confirmar</label>
+                  <input type="password" placeholder="Repita">
+                </div>
+              </div>
+              <button class="btn-next" type="button" onclick="goStep(2)">Próximo →</button>
+            </div>
+ 
+            <!-- STEP 2 — Estilos favoritos -->
+            <div class="step" id="step-2">
+              <div>
+                <div class="tag-section-label">Seus estilos favoritos</div>
+                <div class="tag-hint">Selecione quantos quiser</div>
+                <div class="tag-cloud" id="estilos-cloud">
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Punk Clássico</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Hardcore</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Oi!</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Riot Grrrl</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Crust</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Street Punk</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Post-Punk</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Pop Punk</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Punk Brasileiro</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Anarcho Punk</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Skate Punk</button>
+                  <button type="button" class="tag-btn" onclick="toggleTag(this)">UK82</button>
+                </div>
+              </div>
+              <div class="btn-nav-row">
+                <button class="btn-back" type="button" onclick="goStep(1)">← Voltar</button>
+                <button class="btn-next" type="button" onclick="goStep(3)">Próximo →</button>
+              </div>
+            </div>
+ 
+            <!-- STEP 3 — Bandas favoritas -->
+            <div class="step" id="step-3">
+              <div>
+                <div class="tag-section-label">Bandas que você curte</div>
+                <div class="tag-hint">Clique nas sugestões ou adicione a sua</div>
+                <div class="tag-cloud" style="margin-bottom: 0.8rem;" id="bandas-sugestoes">
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Ramones</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Sex Pistols</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">The Clash</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Black Flag</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Dead Kennedys</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Misfits</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Bikini Kill</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Ratos de Porão</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Garotos Podres</button>
+                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Buzzcocks</button>
+                </div>
+ 
+                <!-- Campo livre -->
+                <div class="field">
+                  <label>Adicionar outra banda</label>
+                  <div class="band-input-row">
+                    <input type="text" id="banda-input" placeholder="Nome da banda..." onkeydown="if(event.key==='Enter'){event.preventDefault();addBand();}">
+                    <button type="button" class="add-btn" onclick="addBand()">+ Add</button>
+                  </div>
+                </div>
+ 
+                <!-- Bandas adicionadas -->
+                <div class="added-bands" id="added-bands"></div>
+              </div>
+ 
+              <div class="check-row" style="margin-top: 0.3rem;">
+                <input type="checkbox" id="termos">
+                <label class="check-text" for="termos">
+                  Li e aceito os <a href="#">termos</a> — sem letras miúdas, sem armadilha
+                </label>
+              </div>
+ 
+              <div class="btn-nav-row">
+                <button class="btn-back" type="button" onclick="goStep(2)">← Voltar</button>
+                <button class="btn-next" type="button" onclick="submitForm()">Criar conta ✖</button>
+              </div>
+              <p class="form-note">Grátis. Sempre foi, sempre vai ser.</p>
+            </div>
+ 
+          </form>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</main>
+ 
+<footer>
+  <span class="footer-txt">EncicloPunk · D.I.Y. · Feito com raiva e amor</span>
+</footer>
+</body>
+</html>
