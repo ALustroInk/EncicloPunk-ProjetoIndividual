@@ -17,17 +17,17 @@
     transition: 0.2s linear; 
 }
 
-body {
-    background-color: var(--bg);
-    font-family: "Special Elite", system-ui;
-    color: var(--white);
-}
-
 /* formatção site */
 section {
     padding: 3rem 1rem;
     margin: 0 auto;
     max-width: 1200px;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: "Special Elite", system-ui;
+    color: var(--white);
 }
 
 /* EFEITO GRANULADO */
@@ -42,7 +42,7 @@ section {
   } 
 
 /* HEADER */
-.header {
+header {
     position: sticky;
     top: 0;
     left: 0;
@@ -107,7 +107,7 @@ section {
     opacity: 1; 
     color: var(--vermelho);
     font-size: 1.5rem; 
-    transition: opacity 0.2s, color 0.2s, width 0.5s;
+    transition: opacity 0.2s, color 0.2s, font-size 0.2s;
 }
 
 /* DIV IMAGEM */

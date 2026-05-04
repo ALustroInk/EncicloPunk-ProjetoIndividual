@@ -34,32 +34,34 @@
 <main>
  
   <!-- ESQUERDA -->
-  <div class="left-panel">
-    <div class="manifesto-tag">Acesso ao arquivo</div>
-    <h1 class="manifesto-title">
+  <div class="left-painel">
+    <div class="title-tag">Acesso ao arquivo</div>
+    <h1 class="title-left">
       <span class="line-white">ENTRE NA RODA</span>
     </h1>
-    <p class="manifesto-text">
+    <p class="title-text">
       Sem algoritmo corporativo. Sem anúncio. Sem regras.
     </p>
     
   </div>
  
   <!-- DIREITA -->
-  <div class="right-panel">
-    <div class="card-wrapper">
-      <div class="card-shadow-yellow"></div>
-      <div class="card-shadow-red"></div>
-      <div class="tape t1"></div>
-      <div class="tape t2"></div>
+  <div class="right-painel">
+    <div class="folha-papel">
+    <span class="furo"></span>
+    <span class="furo"></span>
+    <span class="furo"></span>
+    
+      <div class="card-sombra-amarela"></div>
+      <div class="card-sombra-vermelha"></div>
+      <div class="fita f1"></div>
+      <div class="fita f2"></div>
       <div class="sticker s1">D.I.Y.</div>
-      <div class="sticker s2">Desde 1976 · No Future</div>
+      <div class="sticker s2">Desde 1976 · Anti Sistema</div>
  
       <div class="card">
-        <div class="stamp">PUNK<br>ROCK<br>★</div>
+        <div class="carimbo">PUNK<br>ROCK<br>★</div>
         <div class="card-inner">
-          <div class="holes">
-            <div class="hole"></div><div class="hole"></div><div class="hole"></div>
           </div>
  
           <div class="tabs">
@@ -67,7 +69,7 @@
             <button class="tab" onclick="switchTab('cadastro')">Cadastrar</button>
           </div>
  
-          <!-- ===== LOGIN ===== -->
+          <!-- LOGIN -->
           <form class="form active" id="form-login" onsubmit="return false;">
             <div class="field">
               <label>E-mail</label>
@@ -88,7 +90,7 @@
             <p class="form-note">Nenhum dado vendido. Nunca.</p>
           </form>
  
-          <!-- ===== CADASTRO ===== -->
+          <!-- CADASTRO -->
           <form class="form" id="form-cadastro" onsubmit="return false;">
  
             <!-- Indicador de steps -->
@@ -209,3 +211,86 @@
 </footer>
 </body>
 </html>
+
+<script>
+  // TROCA LOGIN / CADASTRO
+  function switchTab(tab) {
+    if (tab === 'login') {
+      document.getElementById('form-login').style.display = 'flex';
+      document.getElementById('form-cadastro').style.display = 'none';
+      document.querySelectorAll('.tab')[0].classList.add('active');
+      document.querySelectorAll('.tab')[1].classList.remove('active');
+    } else {
+      document.getElementById('form-login').style.display = 'none';
+      document.getElementById('form-cadastro').style.display = 'flex';
+      document.querySelectorAll('.tab')[1].classList.add('active');
+      document.querySelectorAll('.tab')[0].classList.remove('active');
+    }
+  }
+
+  // STEPS DO CADASTRO
+  const stepLabels = { 1: 'Conta', 2: 'Estilos', 3: 'Bandas' };
+
+  function goStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    [1, 2, 3].forEach(i => {
+      const dot = document.getElementById('dot-' + i);
+      dot.classList.remove('active', 'done');
+      if (i < n) dot.classList.add('done');
+      else if (i === n) dot.classList.add('active');
+    });
+    document.getElementById('step-label').textContent = stepLabels[n];
+  }
+
+  // TOGGLE ESTILOS
+  function toggleTag(btn) {
+    btn.classList.toggle('selected');
+  }
+
+  // BANDAS
+  const addedBands = new Set();
+
+  function addBandFromSuggestion(btn) {
+    const name = btn.textContent.trim();
+    if (addedBands.has(name)) {
+      addedBands.delete(name);
+      btn.classList.remove('selected');
+      document.getElementById('tag-' + name.replace(/\s/g, '-')).remove();
+    } else {
+      addedBands.add(name);
+      btn.classList.add('selected');
+      renderAddedTag(name);
+    }
+  }
+
+  function addBand() {
+    const input = document.getElementById('banda-input');
+    const name = input.value.trim();
+    if (!name || addedBands.has(name)) { input.value = ''; return; }
+    addedBands.add(name);
+    renderAddedTag(name);
+    input.value = '';
+  }
+
+  function renderAddedTag(name) {
+    const container = document.getElementById('added-bands');
+    const tag = document.createElement('div');
+    tag.className = 'added-tag';
+    tag.id = 'tag-' + name.replace(/\s/g, '-');
+    tag.innerHTML = `${name} <button onclick="removeTag('${name}')" title="Remover">✕</button>`;
+    container.appendChild(tag);
+  }
+
+  function removeTag(name) {
+    addedBands.delete(name);
+    document.getElementById('tag-' + name.replace(/\s/g, '-')).remove();
+    document.querySelectorAll('#bandas-sugestoes .tag-btn').forEach(btn => {
+      if (btn.textContent.trim() === name) btn.classList.remove('selected');
+    });
+  }
+
+  function submitForm() {
+    alert('Conta criada! Bem-vindo ao caos. ✖');
+  }
+</script>
