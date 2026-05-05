@@ -60,11 +60,26 @@ header {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    text-decoration: none;
+}
 
-.logo img{
-    width: 20rem;
+.logo-img{
+    width: 40px;
     height: auto;
 }
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo-text span { color: var(--vermelho); font-family: 'Special Elite', cursive; text-transform: uppercase; font-weight: bold; letter-spacing: -1px; }
 
 .navbar a {
   margin: 0 1rem;
@@ -238,8 +253,8 @@ header {
 }
 
 .feature-icon img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
 }
 
 .feature-title {
@@ -254,6 +269,7 @@ header {
     font-size: 1.2rem;
     line-height: 1.6;
     opacity: 0.7;
+    text-transform:none;
 }
 
 /* FOOTER */

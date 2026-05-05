@@ -3,15 +3,12 @@
     --border: 0.15rem solid rgb(143, 0, 0);
     --vermelho: #cc1a1a;
     --white: #f6f1f1;
-    font-size: 12px;
-
-
-    --black: #080808;
-    --red: #cc1a1a;
-    --yellow: #f5c200;
     --paper: #e8dfc8;
+    --yellow: #f5c200;
+    --black: #080808;
+    font-size: 12px;
   }
- 
+
 * {
     margin: 0;
     padding: 0;
@@ -21,21 +18,21 @@
     text-transform: capitalize;
     transition: 0.2s linear; 
 }
- 
-  body {
-    background-color: var(--bg);
-    color: var(--white);
-    font-family: 'Bebas Neue', sans-serif;
-  }
 
-  /* formatção site */
-  section {
+/* formatção site */
+section {
     padding: 3rem 1rem;
     margin: 0 auto;
     max-width: 1200px;
 }
- 
-  /* EFEITO GRANULADO */
+
+body {
+    background-color: var(--bg);
+    font-family: "Special Elite", system-ui;
+    color: var(--white);
+}
+
+/* EFEITO GRANULADO */
   body::before {
     content: '';
     position: fixed;
@@ -46,38 +43,51 @@
     z-index: 9999;
   } 
  
-  header {
+ header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
     z-index: 99;
+    /*Esse var surge como a referência capturada no root*/
     border-bottom: var(--border);
     backdrop-filter: blur(3px);
-  }
-  
-  .header section {
+}
+
+.header section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    text-decoration: none;
+}
 
-  .logo {
+.logo-img{
+    width: 40px;
+    height: auto;
+}
+  .logo-text {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.8rem;
     letter-spacing: 0.08em;
     color: var(--white);
     text-decoration: none;
   }
-  .logo span { color: var(--red); }
+  .logo-text span { color: var(--vermelho); font-family: 'Special Elite', cursive; text-transform: uppercase; font-weight: bold; letter-spacing: -1px; }
+
 
   .navbar a {
   font-family: "Special Elite", system-ui;
   margin: 0 1rem;
   font-size: 1.4rem;
-  color: #fff;
+  color: var(--white);
   position: relative;
   text-decoration: none;
 }
@@ -97,8 +107,9 @@
   background: var(--vermelho);
   transition: width 0.3s;
 }
-
-.navbar a:hover::after { width: 100%; }
+.navbar a:hover::after { 
+  width: 100%; 
+}
  
   .back-link {
     font-family: 'Bebas Neue', sans-serif;
@@ -146,7 +157,7 @@
     font-size: 1.3rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--vermelho);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -172,6 +183,7 @@
     margin-bottom: 2.5rem;
     position: relative;
     letter-spacing: 0.1em;
+    text-transform: none;
   }
  
   /* DIREITA */
@@ -190,7 +202,7 @@
     width: 100%;
     max-width: 420px;
     background: #e8dfc8;
-    border-left: 3px solid #2a0a0a86;
+    border-left: 3px solid #33292986;
     padding: 2rem 2rem 2rem 3rem;
 }
 
@@ -199,7 +211,7 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--black);
+    background: var(--bg);
     position: absolute;
     left: -11px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
@@ -218,7 +230,7 @@
   }
   .card-sombra-vermelha {
     position: absolute; inset: 0;
-    background: var(--red);
+    background: var(--vermelho);
     transform: rotate(2deg) translate(7px, 6px);
     z-index: -1;
   }
@@ -261,12 +273,12 @@
     position: absolute;
     top: 1.2rem; right: 1.2rem;
     width: 58px; height: 58px;
-    border: 2px solid var(--red);
+    border: 2px solid var(--vermelho);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     text-align: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem; color: var(--red);
+    font-size: 1rem; color: var(--vermelho);
     letter-spacing: 0.05em;
     transform: rotate(12deg);
     opacity: 0.65; line-height: 1.3;
@@ -293,11 +305,11 @@
   .tabs { display: flex; border-bottom: 2px solid rgba(0,0,0,0.15); margin-bottom: 1.8rem; }
   .tab {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem; letter-spacing: 0.08em;
+    font-size: 1.8rem; letter-spacing: 0.08em;
     padding: 0.4rem 1.2rem 0.4rem 0;
     background: transparent; border: none;
     color: var(--black); opacity: 0.28;
-    cursor: crosshair; outline: none;
+    outline: none;
     transition: opacity 0.2s; position: relative;
   }
   .tab.active { opacity: 1; }
@@ -305,7 +317,7 @@
     content: '';
     position: absolute; bottom: -2px; left: 0;
     width: 100%; height: 2px;
-    background: var(--red);
+    background: var(--vermelho);
   }
   .tab:not(.active):hover { opacity: 0.55; }
  
@@ -324,19 +336,28 @@
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     color: var(--black);
     opacity: 0.3;
     transition: all 0.2s;
     cursor: default;
   }
-  .step-dot.active { opacity: 1; background: var(--black); color: var(--paper); border-color: var(--black); }
-  .step-dot.done { opacity: 1; background: var(--red); color: white; border-color: var(--red); }
+  .step-dot.active { opacity: 1; 
+    background: var(--black);
+     color: var(--paper);
+      border-color: var(--black); 
+    }
+  .step-dot.done { 
+    opacity: 1; 
+    background: var(--vermelho); 
+    color: white; 
+    border-color: var(--vermelho); 
+  }
  
   .step-line { flex: 1; height: 1px; background: rgba(0,0,0,0.12); }
  
   .step-label {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--black);
@@ -358,11 +379,11 @@
     to { opacity: 1; transform: translateX(0); }
   }
  
-  .field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .field { display: flex; flex-direction: column; gap: 0.8rem; }
  
   label {
-    font-size: 0.5rem;
-    letter-spacing: 0.28em;
+    font-size: 1.2rem;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
     color: #8a0000;
     font-family: 'Space Mono', monospace;
@@ -376,31 +397,33 @@
     border-bottom: 1px solid rgba(0,0,0,0.15);
     padding: 0.45rem 0;
     font-family: 'Special Elite', cursive;
-    font-size: 1rem; color: var(--black);
+    font-size: 1.2rem; color: var(--black);
     outline: none; transition: border-color 0.2s;
     cursor: text; width: 100%;
+    text-transform: none ;
   }
   input[type="text"]:focus,
   input[type="email"]:focus,
-  input[type="password"]:focus { border-bottom-color: var(--red); }
-  input::placeholder { color: rgba(0,0,0,0.2); font-size: 0.85rem; }
+  input[type="password"]:focus { border-bottom-color: var(--vermelho); }
+  input::placeholder { color: rgba(0,0,0,0.2); font-size: 1.2rem; }
  
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
  
   .form-link {
-    font-size: 0.55rem; letter-spacing: 0.15em;
+    font-size: 0.80rem; letter-spacing: 0.10em;
     text-transform: uppercase; color: var(--black);
     text-decoration: none; opacity: 0.3;
+    font-weight: bold;
     transition: opacity 0.2s, color 0.2s;
     font-family: 'Space Mono', monospace;
     align-self: flex-end; margin-top: -0.5rem;
   }
-  .form-link:hover { opacity: 1; color: var(--red); }
+  .form-link:hover { opacity: 1; color: var(--vermelho); }
  
   /* TAGS CLICÁVEIS — estilos e bandas */
   .tag-section-label {
-    font-size: 0.5rem;
-    letter-spacing: 0.28em;
+    font-size: 1.2rem;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
     color: #8a0000;
     font-family: 'Space Mono', monospace;
@@ -410,11 +433,12 @@
  
   .tag-hint {
     font-family: 'Special Elite', cursive;
-    font-size: 0.65rem;
+    font-size: 1rem;
     opacity: 0.4;
     color: var(--black);
     margin-bottom: 0.6rem;
     margin-top: -0.1rem;
+    text-transform: none;
   }
  
   .tag-cloud {
@@ -426,10 +450,9 @@
   .tag-btn {
     border: 1px solid rgba(0,0,0,0.2);
     padding: 0.3rem 0.7rem;
-    font-size: 0.6rem;
+    font-size: 1rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    cursor: crosshair;
     transition: all 0.15s;
     font-family: 'Space Mono', monospace;
     background: transparent;
@@ -441,7 +464,7 @@
     background: var(--black);
     color: var(--paper);
     border-color: var(--black);
-    box-shadow: 2px 2px 0 var(--red);
+    box-shadow: 2px 2px 0 var(--vermelho);
   }
  
   /* Input de banda livre */
@@ -459,13 +482,12 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 0.08em;
-    cursor: crosshair;
     outline: none;
     transition: all 0.15s;
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .add-btn:hover { background: var(--red); }
+  .add-btn:hover { background: var(--vermelho); }
  
   .added-bands {
     display: flex;
@@ -475,10 +497,10 @@
   }
  
   .added-tag {
-    background: var(--red);
+    background: var(--vermelho);
     color: var(--white);
     padding: 0.25rem 0.6rem;
-    font-size: 0.6rem;
+    font-size: 1rem;
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.08em;
     display: flex;
@@ -492,7 +514,7 @@
   }
   .added-tag button {
     background: none; border: none;
-    color: var(--white); cursor: crosshair;
+    color: var(--white);
     font-size: 0.65rem; opacity: 0.6;
     padding: 0; outline: none;
     transition: opacity 0.15s;
@@ -500,15 +522,15 @@
   .added-tag button:hover { opacity: 1; }
  
   /* Checkbox */
-  .check-row { display: flex; align-items: flex-start; gap: 0.7rem; cursor: crosshair; }
+  .check-row { display: flex; align-items: flex-start; gap: 0.7rem; }
   .check-row input[type="checkbox"] {
     width: 13px; height: 13px; min-width: 13px;
     appearance: none;
     border: 1px solid rgba(0,0,0,0.25);
-    cursor: crosshair; position: relative; margin-top: 2px;
+    position: relative; margin-top: 2px;
     transition: all 0.15s; background: transparent;
   }
-  .check-row input[type="checkbox"]:checked { background: var(--red); border-color: var(--red); }
+  .check-row input[type="checkbox"]:checked { background: var(--vermelho); border-color: var(--vermelho); }
   .check-row input[type="checkbox"]:checked::after {
     content: '✕';
     position: absolute; top: 50%; left: 50%;
@@ -517,24 +539,24 @@
   }
   .check-text {
     font-family: 'Special Elite', cursive;
-    font-size: 0.72rem; line-height: 1.5;
+    font-size: 0.80rem; line-height: 1.5;
     opacity: 0.55; color: var(--black);
   }
-  .check-text a { color: var(--red); text-decoration: none; }
+  .check-text a { color: var(--vermelho); text-decoration: none; }
  
   /* BOTÕES */
   .btn-submit {
     background: var(--black); color: var(--paper);
     border: none; padding: 0.85rem 0;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.1rem; letter-spacing: 0.15em;
-    cursor: crosshair; width: 100%;
+    font-size: 1.3rem; letter-spacing: 0.15em;
+    width: 100%;
     transition: transform 0.15s, box-shadow 0.15s;
-    outline: none; box-shadow: 4px 4px 0 var(--red);
+    outline: none; box-shadow: 4px 4px 0 var(--vermelho);
     margin-top: 0.3rem;
   }
-  .btn-submit:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
-  .btn-submit:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--red); }
+  .btn-submit:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--vermelho); }
+  .btn-submit:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--vermelho); }
  
   .btn-nav-row { display: flex; gap: 0.8rem; margin-top: 0.3rem; }
  
@@ -543,8 +565,8 @@
     border: 1px solid rgba(0,0,0,0.2);
     padding: 0.85rem 0;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem; letter-spacing: 0.12em;
-    cursor: crosshair; width: 40%;
+    font-size: 1.2rem; letter-spacing: 0.12em;
+    width: 40%;
     transition: all 0.15s; outline: none;
   }
   .btn-back:hover { border-color: var(--black); }
@@ -553,42 +575,84 @@
     background: var(--black); color: var(--paper);
     border: none; padding: 0.85rem 0;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem; letter-spacing: 0.12em;
-    cursor: crosshair; flex: 1;
+    font-size: 1.2rem; letter-spacing: 0.12em;
+    flex: 1;
     transition: transform 0.15s, box-shadow 0.15s;
-    outline: none; box-shadow: 4px 4px 0 var(--red);
+    outline: none; box-shadow: 4px 4px 0 var(--vermelho);
   }
-  .btn-next:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
+  .btn-next:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--vermelho); }
  
   .sep { display: flex; align-items: center; gap: 0.8rem; margin: -0.2rem 0; }
   .sep::before, .sep::after { content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.12); }
-  .sep span { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.35; color: var(--black); }
+  .sep span { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.35; color: var(--black); font-weight: bold;}
  
   .btn-ghost {
     background: transparent; color: var(--black);
     border: 1px solid rgba(0,0,0,0.2);
     padding: 0.75rem 0;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.95rem; letter-spacing: 0.12em;
-    cursor: crosshair; width: 100%;
+    font-size: 1.2rem; letter-spacing: 0.12em;
+    width: 100%;
     transition: all 0.15s; outline: none;
   }
   .btn-ghost:hover { border-color: var(--black); background: rgba(0,0,0,0.05); }
  
   .form-note {
     font-family: 'Special Elite', cursive;
-    font-size: 0.65rem; opacity: 0.3;
+    font-size: 0.95rem; opacity: 0.3;
     text-align: center; color: var(--black);
     margin-top: -0.4rem;
+    text-transform: none;
   }
  
-  footer {
-    position: relative; z-index: 10;
-    padding: 1rem 2.5rem;
-    border-top: 1px solid #111;
-    text-align: center;
-  }
-  .footer-txt { font-family: 'Special Elite', cursive; font-size: 0.65rem; opacity: 0.2; }
+  /* FOOTER */
+.footer {
+  background: var(--grey);
+  color: var(--white);
+  padding: 2.5rem 4rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: var(--border);
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-logo span {
+  color: var(--vermelho);
+}
+
+.footer-desc {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.90rem;
+  opacity: 0.6;
+  line-height: 1.4;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-diy {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--vermelho);
+  opacity: 0.8;
+  letter-spacing: 0.15em;
+}
  
   @media (max-width: 768px) {
     main { grid-template-columns: 1fr; }
