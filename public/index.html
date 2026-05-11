@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="shortcut icon" href="../img/logobranca.png" type="image/x-icon">
-    <script src="../js/index.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="./imgs/logobranca.png" type="image/x-icon">
+    <script src="./js/index.js"></script>
     <title>Home | Enciclopunk</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,23 +16,22 @@
 <body>
     <header class="header">
         <section>
-            <a href="index.html" class="logo-container">
-            <img src="../img/logobranca.png" alt="Logo" class="logo-img">
-            <span class="logo-text">Arq<span>Punk</span></span>
+            <a href="/index.html" class="logo-container">
+                <img src="./imgs/logobranca.png" alt="Logo" class="logo-img">
+                <span class="logo-text">Arq<span>Punk</span></span>
             </a>
 
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="./historia.html">História</a>
-            <a href="./vertentes.html">Vertentes</a>
-            <a href="./musica.html">Música</a>
-            <a href="./sobre.html">Sobre</a>
-        </nav>
+            <nav class="navbar">
+                <a href="/index.html">Home</a>
+                <a href="/historia.html">História</a>
+                <a href="/vertentes.html">Vertentes</a>
+                <a href="/musica.html">Música</a>
+                <a href="/sobre.html">Sobre</a>
+            </nav>
 
-        <div class="perfil">
-            <a href="./autenticacao.html">Login</a>
-           
-        </div>
+            <!-- O JS vai preencher esse div automaticamente com Login ou Perfil -->
+            <div class="perfil" id="nav-perfil"></div>
+        </section>
     </header>
 
     
@@ -86,7 +85,7 @@
   <div class="section-title">Três Acordes.<br>Infinito Conteúdo.</div>
   <div class="features-grid">
     
-    <a href="./historia.html" class="feature-link">
+    <a href="/historia.html" class="feature-link">
     <div class="feature-cell">
       <div class="feature-number">01</div>
       <div class="feature-icon"><img src="https://img.icons8.com/?size=100&id=80158&format=png&color=ffffff" alt=""></div>
@@ -95,7 +94,7 @@
     </div>
     </a>
 
-    <a href="./vertentes.html" class="feature-link">
+    <a href="/vertentes.html" class="feature-link">
     <div class="feature-cell">
       <div class="feature-number">02</div>
       <div class="feature-icon"><img src="https://img.icons8.com/?size=100&id=11076&format=png&color=ffffff" alt=""></div>
@@ -111,7 +110,7 @@
       <div class="feature-desc">Diz o que você curte, e descubra o que você ainda não ouviu.</div>
     </div>
 
-    <a href="./vertentes.html#punk-brasileiro" class="feature-link">
+    <a href="/vertentes.html#punk-brasileiro" class="feature-link">
     <div class="feature-cell">
       <div class="feature-number">04</div>
       <div class="feature-icon"><img src="https://img.icons8.com/?size=100&id=84513&format=png&color=ffffff" alt=""></div>
@@ -120,7 +119,7 @@
     </div>
     </a>
 
-    <a href="./historia.html#alem-musica" class="feature-link">
+    <a href="/historia.html#alem-musica" class="feature-link">
     <div class="feature-cell">
       <div class="feature-number">05</div>
       <div class="feature-icon"><img src="https://img.icons8.com/?size=100&id=40314&format=png&color=ffffff" alt=""></div>
@@ -155,4 +154,3 @@
     
 </body>
 </html>
-

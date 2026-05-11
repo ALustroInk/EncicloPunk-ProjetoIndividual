@@ -46,6 +46,12 @@ CREATE TABLE usuario_vertente (
   FOREIGN KEY (usuario_idusuario)   REFERENCES usuario(idusuario) ON DELETE CASCADE,
   FOREIGN KEY (vertente_idvertente) REFERENCES vertente(idvertente)
 );
+
+CREATE TABLE usuario_banda (
+  usuario_idusuario INT NOT NULL,
+  banda_idbanda     INT NOT NULL,
+  PRIMARY KEY (usuario_idusuario, banda_idbanda)
+);
  
 CREATE TABLE acesso (
   idacesso          INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,4 +77,4 @@ INSERT INTO endereco (cidade, estado) VALUES ('São Paulo', 'SP');
  
 -- admin
 INSERT INTO usuario (nome, email, senha, tipo_usuario, endereco_idendereco)
-VALUES ('Admin', 'admin@arqpunk.com', 'senhaaqui', 'admin', 1);
+VALUES ('Admin', 'admin@arqpunk.com', 'admAndressa2006@', 'admin', 1);

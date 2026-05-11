@@ -1,8 +1,8 @@
-![EncicloPunk Banner](./aindanaotem.png)
+![ArqPunk Banner](./aindanaotem.png)
 
 ---
 
-# EncicloPunk
+# ArqPunk
  
 > O arquivo definitivo do Punk Rock. História, subculturas e Música num só lugar.
  
@@ -13,9 +13,9 @@
  
 ## Sobre o projeto
  
-O **EncicloPunk** nasceu da necessidade de ter um lugar exclusivo e aberto para documentar e celebrar o punk em todas as suas formas. Aqui você encontra a história do movimento, suas principais subculturas e um recomendador de músicas baseado no seu gosto.
+O **ArqPunk** nasceu da necessidade de ter um lugar exclusivo e aberto para documentar e celebrar o punk em todas as suas formas. Aqui você encontra a história do movimento, suas principais subculturas e um recomendador de músicas baseado no seu gosto.
  
-Sem algoritmo corporativo, sem paywalls. D.I.Y.
+Sem algoritmo corporativo. D.I.Y.
  
 ---
  
