@@ -40,23 +40,58 @@ Sem algoritmo corporativo. D.I.Y.
  
 ## 📁 Estrutura do projeto
  
-```
-enciclopunk/
-├── public/              # Arquivos estáticos (HTML, CSS, JS)
+arqpunk/
+│
+├── public/                         Tudo que o navegador acessa
+│   │
 │   ├── css/
+│   │   ├── style.css               Estilo da home e páginas gerais
+│   │   ├── styleautent.css         Estilo da tela de login/cadastro
+│   │   ├── stylehistoria.css       Estilo de história e vertentes
+│   │   ├── stlyledash.css          Estilo da dashboard do usuário
+│   │   └── styleadmin.css          Estilo do painel admin
+│   │
 │   ├── js/
-│   └── assets/
-├── src/
-│   ├── routes/          # Rotas da API Express
-│   ├── controllers/     # Lógica de negócio
-│   ├── models/          # Modelos do banco de dados
-│   └── config/          # Configurações gerais
-├── database/
-│   └── migrations/      # Scripts SQL
-├── .env.example
-├── server.js
-└── package.json
-```
+│   │   ├── index.js                Verificação de login + controle do header
+│   │   ├── autenticacao.js         Login e cadastro (fetch → API)
+│   │   ├── dashboard.js            Dados do usuário
+│   │   └── admin.js                Painel admin
+│   │
+│   ├── imgs/                       Imagens, logos, gifs
+│   │
+│   ├── dashboard/
+│   │   ├── dashboard.html          Página de perfil do usuário logado
+│   │   └── admin.html              Painel para admin
+│   │
+│   ├── index.html                  Home - pública
+│   ├── autenticacao.html           Login e cadastro - pública
+│   ├── historia.html               Protegida - logado
+│   ├── vertentes.html              Protegida - logado
+│   ├── musica.html                 Protegida - logado
+│   └── sobre.html                  Protegida - logado
+│
+├── src/                            API - Web-Data-Viz
+│   │
+│   ├── routes/
+│   │   ├── index.js                Rota raiz
+│   │   └── usuarios.js             Rotas /usuarios/cadastrar e /autenticar
+│   │
+│   ├── controllers/
+│   │   └── usuarioController.js    Valida os dados e chama o model
+│   │
+│   ├── models/
+│   │   └── usuarioModel.js         Faz as queries no banco MySQL
+│   │
+│   └── database/
+│       ├── config.js               Conexão com o banco
+│       └── script-tabelas.sql      SQL ArqPunk
+│
+│
+├── app.js                          Inicia o servidor Express
+├── .env                            Credenciais de produção
+├── .env.dev                        Credenciais de desenvolvimento
+├── package.json                    ---
+└── .gitignore                      ---
  
 ---
 
