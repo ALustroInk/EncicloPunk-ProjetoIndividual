@@ -1,8 +1,6 @@
 var database = require("../database/config");
 
 function autenticar(email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function autenticar(): ", email, senha);
-
     var instrucaoSql = `
         SELECT
             u.idusuario,
@@ -17,14 +15,10 @@ function autenticar(email, senha) {
                 ON u.endereco_idendereco = e.idendereco
         WHERE u.email = '${email}' AND u.senha = '${senha}';
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function cadastrar(nome, email, senha, cidade, estado) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, cidade, estado);
-
-    // Primeiro INSERT: cria o endereço e pega o id gerado
     var instrucaoEndereco = `
         INSERT INTO endereco (cidade, estado) VALUES ('${cidade}', '${estado}');
     `;
@@ -32,22 +26,98 @@ function cadastrar(nome, email, senha, cidade, estado) {
 
     return database.executar(instrucaoEndereco)
         .then(function (resultadoEndereco) {
-
-            // insertId é o id gerado automaticamente pelo banco para o endereço que acabamos de criar
             var idEndereco = resultadoEndereco.insertId;
-
-            // Segundo INSERT: cria o usuário usando o id do endereço acima
             var instrucaoUsuario = `
                 INSERT INTO usuario (nome, email, senha, endereco_idendereco)
                 VALUES ('${nome}', '${email}', '${senha}', ${idEndereco});
             `;
-            console.log("Executando a instrução SQL (usuário): \n" + instrucaoUsuario);
-
             return database.executar(instrucaoUsuario);
         });
 }
 
+function salvarEstilos(idusuario, estilosNomes) {
+    if (!estilosNomes || estilosNomes.length === 0) return Promise.resolve();
+
+    var promessas = estilosNomes.map(function (nome) {
+        return database.executar(`SELECT idvertente FROM vertente WHERE nome = '${nome}' LIMIT 1;`)
+            .then(function (resultado) {
+                if (resultado.length === 0) return;
+                var idvertente = resultado[0].idvertente;
+                return database.executar(`
+                    INSERT IGNORE INTO usuario_vertente (usuario_idusuario, vertente_idvertente)
+                    VALUES (${idusuario}, ${idvertente});
+                `);
+            });
+    });
+
+    return Promise.all(promessas);
+}
+
+function salvarBandas(idusuario, bandasNomes) {
+    if (!bandasNomes || bandasNomes.length === 0) return Promise.resolve();
+
+    var promessas = bandasNomes.map(function (nome) {
+        return database.executar(`SELECT idbanda FROM banda WHERE nome = '${nome}' LIMIT 1;`)
+            .then(function (resultado) {
+                if (resultado.length > 0) {
+    
+                    return resultado[0].idbanda;
+                } else {
+                    
+                    return database.executar(`INSERT INTO banda (nome) VALUES ('${nome}');`)
+                        .then(function (res) { return res.insertId; });
+                }
+            })
+            .then(function (idbanda) {
+                return database.executar(`
+                    INSERT IGNORE INTO usuario_banda (usuario_idusuario, banda_idbanda)
+                    VALUES (${idusuario}, ${idbanda});
+                `);
+            });
+    });
+
+    return Promise.all(promessas);
+}
+
+function buscarPerfil(idusuario) {
+    var sqlEstilos = `
+        SELECT v.idvertente, v.nome
+        FROM usuario_vertente uv
+            INNER JOIN vertente v ON uv.vertente_idvertente = v.idvertente
+        WHERE uv.usuario_idusuario = ${idusuario};
+    `;
+    var sqlBandas = `
+        SELECT b.idbanda, b.nome
+        FROM usuario_banda ub
+            INNER JOIN banda b ON ub.banda_idbanda = b.idbanda
+        WHERE ub.usuario_idusuario = ${idusuario};
+    `;
+    var sqlAcessos = `
+        SELECT p.nome AS pagina, a.acessado_em
+        FROM acesso a
+            INNER JOIN pagina p ON a.pagina_idpagina = p.idpagina
+        WHERE a.usuario_idusuario = ${idusuario}
+        ORDER BY a.acessado_em DESC
+        LIMIT 5;
+    `;
+
+    return Promise.all([
+        database.executar(sqlEstilos),
+        database.executar(sqlBandas),
+        database.executar(sqlAcessos)
+    ]).then(function (resultados) {
+        return {
+            estilos: resultados[0],
+            bandas:  resultados[1],
+            acessos: resultados[2]
+        };
+    });
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    salvarEstilos,
+    salvarBandas,
+    buscarPerfil
 };

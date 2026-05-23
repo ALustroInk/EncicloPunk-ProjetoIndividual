@@ -6,8 +6,7 @@ function verificarLogin() {
     }
 }
 
-// Se estiver logado: mostra "Perfil" com o nome do usuário
-// Se não estiver: mostra "Login"
+// Se estiver logado mostra perfil com o nome do usuário, se não mostra login
 function atualizarHeader() {
     var navPerfil = document.getElementById('nav-perfil');
     if (!navPerfil) return;
@@ -15,12 +14,13 @@ function atualizarHeader() {
     var usuarioLogado = localStorage.getItem('usuarioLogado');
 
     if (usuarioLogado) {
-        // Pega os dados do usuário que foram salvos no login
         var usuario = JSON.parse(usuarioLogado);
+        var destino = usuario.tipo_usuario === "admin"
+            ? "/dashboard/admin.html"
+            : "/dashboard/dashboard.html";
 
-        // Troca o conteúdo do div por um link de perfil com o nome do usuário
         navPerfil.innerHTML = `
-            <a href="/dashboard/dashboard.html" class="btn-perfil">
+            <a href="${destino}" class="btn-perfil">
                 <img src="/imgs/user.png" alt="Perfil" class="icone-perfil">
                 <span>${usuario.nome.split(' ')[0]}</span>
             </a>

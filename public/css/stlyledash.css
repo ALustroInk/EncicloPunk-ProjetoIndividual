@@ -1,9 +1,9 @@
-/* ROOT */
 :root {
     --vermelho: #cc1a1a;
     --white: #f6f1f1;
     --bg: #0a0a0a;
     --border: 0.15rem solid rgb(143, 0, 0);
+    --dot: #78c322;
 
     font-size: 12px;
 }
@@ -23,7 +23,6 @@ section {
     max-width: 1200px;
 }
 
-/* BODY */
 body {
     background-color: var(--bg);
     font-family: "Special Elite", system-ui;
@@ -64,7 +63,6 @@ body::before {
     padding-bottom: 1.5rem;
 }
 
-/* LOGO */
 
 .logo-container {
     display: flex;
@@ -88,9 +86,6 @@ body::before {
   .logo-text span { color: var(--vermelho); font-family: 'Special Elite', cursive; text-transform: uppercase; font-weight: bold; letter-spacing: -1px; }
 
 
-
-
-/* NAVBAR */
 .navbar a {
   font-family: "Special Elite", system-ui;
   margin: 0 1rem;
@@ -144,7 +139,7 @@ body::before {
 
   }
 
-/* LAYOUT */
+
 .shell {
     display: flex;
 
@@ -153,7 +148,6 @@ body::before {
     padding: 4rem;
 }
 
-/* SIDEBAR */
 .sidebar {
     width: 300px;
 }
@@ -167,7 +161,6 @@ body::before {
     top: 100px;
 }
 
-/* PERFIL */
 .avatar {
     width: 90px;
     height: 90px;
@@ -195,7 +188,8 @@ body::before {
 
 .perfil-email {
     margin-top: 0.5rem;
-
+    font-size: 1.2rem;
+    text-transform: none;
     opacity: 0.6;
 }
 
@@ -220,12 +214,12 @@ body::before {
 
     border-radius: 50%;
 
-    background: var(--vermelho);
+    background: var(--dot);
 
     display: inline-block;
 }
 
-/* STATS */
+
 .stat-mini-grid {
     display: flex;
 
@@ -256,7 +250,6 @@ body::before {
     opacity: 0.7;
 }
 
-/* CARIMBO */
 .carimbo {
     margin-top: 2rem;
 
@@ -269,12 +262,10 @@ body::before {
     font-family: 'Bebas Neue', sans-serif;
 }
 
-/* CONTENT */
 .content {
     flex: 1;
 }
 
-/* HERO */
 .hero-titulo {
     font-family: 'Bebas Neue', sans-serif;
 
@@ -289,7 +280,7 @@ body::before {
     margin-bottom: 3rem;
 }
 
-/* CARDS */
+
 .cards-row {
     display: flex;
 
@@ -351,7 +342,6 @@ body::before {
     margin-bottom: 2rem;
 }
 
-/* TAGS */
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -365,7 +355,6 @@ body::before {
     padding: 1rem;
 }
 
-/* RECOMENDACOES */
 .rec-grid {
     display: grid;
 
@@ -374,14 +363,12 @@ body::before {
     gap: 1rem;
 }
 
-/* ATIVIDADES */
 .atividade-row {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
 }
 
-/* FOOTER */
 .footer {
   background: var(--grey);
   color: var(--white);

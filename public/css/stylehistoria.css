@@ -203,7 +203,7 @@ header {
 }
 
 .hero-tag {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
 
@@ -230,7 +230,7 @@ header {
 }
 
 .hero-content p {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     line-height: 1.8;
 
     opacity: .7;
@@ -251,7 +251,7 @@ header {
     padding: 1rem 2rem;
 
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     letter-spacing: .15em;
 
     box-shadow: 4px 4px 0 var(--vermelho);
@@ -262,8 +262,6 @@ header {
     box-shadow: 6px 6px 0 var(--vermelho);
 }
 
-/*
- COLAGEM */
 .hero-colagem {
     position: relative;
 
@@ -475,7 +473,7 @@ header {
 
 .timeline-content p,
 .timeline-content li {
-    font-size: 1.25rem;
+    font-size: 1.60rem;
     line-height: 1.9;
 
     opacity: .72;
@@ -496,13 +494,11 @@ header {
 
     padding-left: 1.5rem;
 
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 
     opacity: .8;
 }
 
-/*
- INFO GRID */
 .info-grid {
     display: grid;
 
@@ -520,7 +516,7 @@ header {
 
     padding: 1.5rem;
 
-    font-size: 1rem;
+    font-size: 1.3rem;
     line-height: 1.8;
 }
 
@@ -532,11 +528,10 @@ header {
     color: var(--vermelho);
 
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
-/*
- LEGADO */
+
 .legacy-section {
     padding: 8rem 8%;
 }
@@ -572,7 +567,7 @@ header {
 }
 
 .legacy-card p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     line-height: 1.8;
 
     opacity: .7;
@@ -580,8 +575,6 @@ header {
     text-transform: none;
 }
 
-/*
- FINAL */
 .final-banner {
     min-height: 60vh;
 
@@ -624,7 +617,7 @@ header {
 }
 
 .final-content p {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     line-height: 2;
 
     opacity: .7;
@@ -632,8 +625,7 @@ header {
     text-transform: none;
 }
 
-/*
- FOOTER */
+
 .footer {
     padding: 2.5rem 4rem;
 
@@ -673,55 +665,3 @@ header {
     letter-spacing: .15em;
 }
 
-/*
- RESPONSIVO */
-@media(max-width: 900px) {
-
-    .hero-historia {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .timeline-section::before {
-        left: 20px;
-    }
-
-    .timeline-card,
-    .timeline-card.reverse {
-        justify-content: flex-end;
-    }
-
-    .timeline-year {
-        left: 20px;
-
-        width: 6rem;
-        height: 6rem;
-    }
-
-    .timeline-content {
-        width: calc(100% - 7rem);
-    }
-}
-
-@media(max-width: 768px) {
-
-    .navbar {
-        display: none;
-    }
-
-    .hero-colagem {
-        width: 100%;
-        height: 32rem;
-    }
-
-    .polaroid {
-        width: 14rem;
-        height: 18rem;
-    }
-
-    .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-    }
-}

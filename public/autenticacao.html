@@ -32,7 +32,6 @@
 
   <main>
 
-    <!-- ESQUERDA -->
     <div class="left-painel">
       <div class="title-tag">Acesso ao arquivo</div>
       <h1 class="title-left">
@@ -43,7 +42,6 @@
       </p>
     </div>
 
-    <!-- DIREITA -->
     <div class="right-painel">
       <div class="folha-papel">
         <span class="furo"></span>
@@ -70,11 +68,11 @@
             <form class="form active" id="form-login" onsubmit="return false;">
               <div class="field">
                 <label>E-mail</label>
-                <input type="email" placeholder="seu@email.com">
+                <input type="email" id="login-email" placeholder="seu@email.com">
               </div>
               <div class="field">
                 <label>Senha</label>
-                <input type="password" placeholder="••••••••">
+                <input type="password" id="login-senha" placeholder="••••••••">
               </div>
               <button class="btn-submit" onclick="fazerLogin()">Entrar no Arquivo</button>
             </form>
@@ -95,16 +93,53 @@
               <div class="step active" id="step-1">
                 <div class="field">
                   <label>Como te chamam</label>
-                  <input type="text" placeholder="Seu nome ou apelido">
+                  <input type="text" id="cad-nome" placeholder="Seu nome ou apelido">
                 </div>
                 <div class="field">
                   <label>E-mail</label>
-                  <input type="email" placeholder="seu@email.com">
+                  <input type="email" id="cad-email" placeholder="seu@email.com">
+                </div>
+                <div class="field">
+                  <label>Senha</label>
+                  <input type="password" id="cad-senha" placeholder="Mín. 8 caracteres">
                 </div>
                 <div class="field-row">
                   <div class="field">
-                    <label>Senha</label>
-                    <input type="password" placeholder="Mín. 8 caracteres">
+                    <label>Cidade</label>
+                    <input type="text" id="cad-cidade" placeholder="Sua cidade">
+                  </div>
+                  <div class="field">
+                    <label>Estado</label>
+                    <select id="cad-estado">
+                      <option value="">UF</option>
+                      <option value="AC">AC</option>
+                      <option value="AL">AL</option>
+                      <option value="AM">AM</option>
+                      <option value="AP">AP</option>
+                      <option value="BA">BA</option>
+                      <option value="CE">CE</option>
+                      <option value="DF">DF</option>
+                      <option value="ES">ES</option>
+                      <option value="GO">GO</option>
+                      <option value="MA">MA</option>
+                      <option value="MG">MG</option>
+                      <option value="MS">MS</option>
+                      <option value="MT">MT</option>
+                      <option value="PA">PA</option>
+                      <option value="PB">PB</option>
+                      <option value="PE">PE</option>
+                      <option value="PI">PI</option>
+                      <option value="PR">PR</option>
+                      <option value="RJ">RJ</option>
+                      <option value="RN">RN</option>
+                      <option value="RO">RO</option>
+                      <option value="RR">RR</option>
+                      <option value="RS">RS</option>
+                      <option value="SC">SC</option>
+                      <option value="SE">SE</option>
+                      <option value="SP">SP</option>
+                      <option value="TO">TO</option>
+                    </select>
                   </div>
                 </div>
                 <button class="btn-next" type="button" onclick="goStep(2)">Próximo →</button>
@@ -116,19 +151,19 @@
                   <div class="tag-section-label">Seus estilos favoritos</div>
                   <div class="tag-hint">Selecione quantos quiser</div>
                   <div class="tag-cloud" id="estilos-cloud">
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Punk Rock</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Hardcore</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Oi!</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Riot Grrrl</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Crust</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Street Punk</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Post-Punk</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Pop Punk</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Punk Brasileiro</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Anarcho Punk</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">Skate Punk</button>
-                  <button type="button" class="tag-btn" onclick="toggleTag(this)">UK82</button>
-                </div>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Punk Rock</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Hardcore</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Oi!</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Riot Grrrl</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Crust</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Street Punk</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Post-Punk</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Pop Punk</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Punk Brasileiro</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Anarcho Punk</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Skate Punk</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">UK82</button>
+                  </div>
                 </div>
                 <div class="btn-nav-row">
                   <button class="btn-back" type="button" onclick="goStep(1)">← Voltar</button>
@@ -143,15 +178,15 @@
                   <div class="tag-hint">Clique nas sugestões ou adicione a sua</div>
                   <div class="tag-cloud" style="margin-bottom: 0.8rem;" id="bandas-sugestoes">
                     <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Ramones</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Sex Pistols</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">The Clash</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Black Flag</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Dead Kennedys</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Misfits</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Bikini Kill</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Ratos de Porão</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Garotos Podres</button>
-                  <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Buzzcocks</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Sex Pistols</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">The Clash</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Black Flag</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Dead Kennedys</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Misfits</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Bikini Kill</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Ratos de Porão</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Garotos Podres</button>
+                    <button type="button" class="tag-btn" onclick="addBandFromSuggestion(this)">Buzzcocks</button>
                   </div>
                   <div class="field">
                     <label>Adicionar outra banda</label>
@@ -197,6 +232,6 @@
     </div>
   </footer>
 
-  <script src="../js/autenticacao.js"></script>
+  <script src="/js/autenticacao.js"></script>
 </body>
 </html>

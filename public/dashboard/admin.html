@@ -33,7 +33,6 @@
 
   <div class="shell">
 
-    <!-- TOPO -->
     <div class="topo">
       <div class="topo-esq">
         <div class="topo-label">// acesso restrito · admin</div>
@@ -41,42 +40,37 @@
         <div class="topo-sub">visão geral do sistema · ArqPunk</div>
       </div>
       <div class="topo-dir">
+        <button class="btn-logout" onclick="fazerLogout()">↩ Sair</button>
         <div class="topo-data" id="data-atual"></div>
-        <div class="topo-status">
-          <div class="status-live"></div>
-          <span class="status-txt">Sistema online</span>
-        </div>
+        
       </div>
     </div>
 
-    <!-- KPIs -->
     <div class="kpi-row">
       <div class="kpi kpi-amarelo">
         <div class="kpi-label">Total de Usuários</div>
-        <div class="kpi-num">47</div>
-        <div class="kpi-sub">+3 essa semana</div>
+        <div class="kpi-num" id="kpi-total-usuarios">—</div>
+        <div class="kpi-sub">cadastros ativos</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">Acessos Totais</div>
-        <div class="kpi-num">1.2k</div>
+        <div class="kpi-num" id="kpi-total-acessos">—</div>
         <div class="kpi-sub">todas as páginas</div>
       </div>
       <div class="kpi kpi-verde">
         <div class="kpi-label">Página Mais Acessada</div>
-        <div class="kpi-num" style="font-size:1.8rem; padding-top:0.4rem">Música</div>
-        <div class="kpi-sub">312 acessos</div>
+        <div class="kpi-num" id="kpi-pagina-top-nome" style="font-size:1.8rem; padding-top:0.4rem">—</div>
+        <div class="kpi-sub" id="kpi-pagina-top-count">— acessos</div>
       </div>
       <div class="kpi kpi-branco">
         <div class="kpi-label">Estados Ativos</div>
-        <div class="kpi-num">6</div>
+        <div class="kpi-num" id="kpi-estados-ativos">—</div>
         <div class="kpi-sub">estados com usuários</div>
       </div>
     </div>
 
-    <!-- GRID PRINCIPAL -->
     <div class="main-grid">
 
-      <!-- ESTILOS -->
       <div class="card">
         <div class="card-top">
           <span class="card-label">// estilos</span>
@@ -85,7 +79,6 @@
         <div class="ranking" id="estilos-ranking"></div>
       </div>
 
-      <!-- BANDAS -->
       <div class="card">
         <div class="card-top">
           <span class="card-label">// bandas</span>
@@ -94,7 +87,6 @@
         <div class="ranking" id="bandas-ranking"></div>
       </div>
 
-      <!-- ESTADOS -->
       <div class="card">
         <div class="card-top">
           <span class="card-label">// geografia</span>
@@ -103,7 +95,16 @@
         <div class="estados-grid" id="estados-grid"></div>
       </div>
 
-      <!-- ÚLTIMOS ACESSOS -->
+      <div class="card full">
+        <div class="card-top">
+          <span class="card-label">// visualização · acessos por página</span>
+          <span class="card-titulo">Distribuição de Acessos</span>
+        </div>
+        <div style="position: relative; height: 220px;">
+          <canvas id="grafico-acessos"></canvas>
+        </div>
+      </div>
+
       <div class="card full">
         <div class="card-top">
           <span class="card-label">// atividade · últimos acessos registrados</span>
@@ -140,6 +141,7 @@
 
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="/js/admin.js"></script>
 </body>
 </html>
