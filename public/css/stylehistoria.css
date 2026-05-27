@@ -47,8 +47,6 @@ body::before {
     z-index: 9999;
 }
 
-/*
- HEADER */
 header {
     position: sticky;
     top: 0;
@@ -162,8 +160,6 @@ header {
     opacity: 1;
 }
 
-/*
- HERO */
 .hero-historia {
     min-height: 100vh;
     display: flex;
@@ -333,8 +329,6 @@ header {
     background-position: center;
 }
 
-/*
- INTRO */
 .timeline-intro {
     padding: 8rem 1rem 3rem;
     text-align: center;
@@ -495,6 +489,7 @@ header {
     padding-left: 1.5rem;
 
     font-size: 1.4rem;
+    text-transform: none;
 
     opacity: .8;
 }

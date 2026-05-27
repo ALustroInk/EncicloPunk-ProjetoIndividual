@@ -26,20 +26,17 @@ function atualizarHeader() {
             </a>
         `;
     } else {
-        // se não estiver logado, mostra o login
         navPerfil.innerHTML = `
             <a href="/autenticacao.html">Login</a>
         `;
     } 
 }
 
-// Faz logout: apaga o usuário do localStorage e volta para o login
 function logout() {
     localStorage.removeItem('usuarioLogado');
     window.location.href = '/autenticacao.html';
 }
 
-// Quando a página terminar de carregar, atualiza o header automaticamente
 window.addEventListener('DOMContentLoaded', function () {
     atualizarHeader();
 });

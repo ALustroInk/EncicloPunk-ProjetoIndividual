@@ -1,4 +1,4 @@
-![ArqPunk Banner](./aindanaotem.png)
+![ArqPunk Banner](./public/imgs/readmeBanner.png)
 
 ---
 

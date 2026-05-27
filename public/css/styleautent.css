@@ -467,7 +467,6 @@ body {
     box-shadow: 2px 2px 0 var(--vermelho);
   }
  
-  /* Input de banda livre */
   .band-input-row {
     display: flex;
     gap: 0.5rem;
