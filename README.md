@@ -38,61 +38,57 @@ Sem algoritmo corporativo. D.I.Y.
 
 ---
  
-## 📁 Estrutura do projeto
+## Estrutura do projeto
  
 arqpunk/
 │
-├── public/                         Tudo que o navegador acessa
+├── public/                         
 │   │
 │   ├── css/
-│   │   ├── style.css               Estilo da home e páginas gerais
-│   │   ├── styleautent.css         Estilo da tela de login/cadastro
-│   │   ├── stylehistoria.css       Estilo de história e vertentes
-│   │   ├── stlyledash.css          Estilo da dashboard do usuário
-│   │   └── styleadmin.css          Estilo do painel admin
+│   │   ├── style.css               
+│   │   ├── styleautent.css         
+│   │   ├── stylehistoria.css       
+│   │   ├── stlyledash.css          
+│   │   └── styleadmin.css          
 │   │
 │   ├── js/
-│   │   ├── index.js                Verificação de login + controle do header
-│   │   ├── autenticacao.js         Login e cadastro (fetch → API)
-│   │   ├── dashboard.js            Dados do usuário
-│   │   └── admin.js                Painel admin
+│   │   ├── index.js                
+│   │   ├── autenticacao.js        
+│   │   ├── dashboard.js            
+│   │   └── admin.js               
 │   │
-│   ├── imgs/                       Imagens, logos, gifs
+│   ├── imgs/                       
 │   │
 │   ├── dashboard/
-│   │   ├── dashboard.html          Página de perfil do usuário logado
-│   │   └── admin.html              Painel para admin
+│   │   ├── dashboard.html         
+│   │   └── admin.html             
 │   │
-│   ├── index.html                  Home - pública
-│   ├── autenticacao.html           Login e cadastro - pública
-│   ├── historia.html               Protegida - logado
-│   ├── vertentes.html              Protegida - logado
-│   ├── musica.html                 Protegida - logado
-│   └── sobre.html                  Protegida - logado
+│   ├── index.html              
+│   ├── autenticacao.html           
+│   ├── historia.html               
+│   ├── vertentes.html              
+│   ├── musica.html                 
+│   └── sobre.html                  
 │
-├── src/                            API - Web-Data-Viz
+├── src/                          
 │   │
 │   ├── routes/
-│   │   ├── index.js                Rota raiz
-│   │   └── usuarios.js             Rotas /usuarios/cadastrar e /autenticar
+│   │   ├── index.js              
+│   │   └── usuarios.js            
 │   │
 │   ├── controllers/
-│   │   └── usuarioController.js    Valida os dados e chama o model
+│   │   └── usuarioController.js    
 │   │
 │   ├── models/
-│   │   └── usuarioModel.js         Faz as queries no banco MySQL
+│   │   └── usuarioModel.js         
 │   │
 │   └── database/
-│       ├── config.js               Conexão com o banco
-│       └── script-tabelas.sql      SQL ArqPunk
+│       ├── config.js              
+│       └── script-tabelas.sql      
 │
 │
-├── app.js                          Inicia o servidor Express
-├── .env                            Credenciais de produção
-├── .env.dev                        Credenciais de desenvolvimento
-├── package.json                    ---
-└── .gitignore                      ---
- 
----
-
------
+├── app.js                          
+├── .env                           
+├── .env.dev                        
+├── package.json                   
+└── .gitignore                     
