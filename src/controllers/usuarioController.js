@@ -66,11 +66,21 @@ function buscarRecomendacoes(req, res) {
         .catch(function (erro) { res.status(500).json(erro.sqlMessage); });
 }
 
+function registrarAcesso(req, res) {
+    var idusuario  = req.body.idusuario;
+    var nomePagina = req.body.pagina;
+    if (!idusuario || !nomePagina) { res.status(400).send("idusuario e pagina são obrigatórios"); return; }
+    usuarioModel.registrarAcesso(idusuario, nomePagina)
+        .then(function () { res.json({ ok: true }); })
+        .catch(function (erro) { console.log(erro); res.status(500).json(erro.sqlMessage); });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     salvarEstilos,
     salvarBandas,
     buscarPerfil,
-    buscarRecomendacoes
+    buscarRecomendacoes,
+    registrarAcesso
 };

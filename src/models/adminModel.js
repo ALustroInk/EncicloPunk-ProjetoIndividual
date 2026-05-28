@@ -2,10 +2,11 @@ var database = require("../database/config");
 
 function buscarDados() {
 
+    // Conta usuários que NÃO são admin (mais seguro que filtrar por 'usuario')
     var sqlTotalUsuarios = `
         SELECT COUNT(*) AS total
         FROM usuario
-        WHERE tipo_usuario = 'usuario';
+        WHERE tipo_usuario != 'admin';
     `;
 
     var sqlTotalAcessos = `
@@ -26,7 +27,7 @@ function buscarDados() {
         SELECT COUNT(DISTINCT e.estado) AS total
         FROM usuario u
             INNER JOIN endereco e ON u.endereco_idendereco = e.idendereco
-        WHERE u.tipo_usuario = 'usuario';
+        WHERE u.tipo_usuario != 'admin';
     `;
 
     var sqlEstilos = `
@@ -51,12 +52,11 @@ function buscarDados() {
         SELECT e.estado, COUNT(*) AS total
         FROM usuario u
             INNER JOIN endereco e ON u.endereco_idendereco = e.idendereco
-        WHERE u.tipo_usuario = 'usuario'
+        WHERE u.tipo_usuario != 'admin'
         GROUP BY e.estado
         ORDER BY total DESC;
     `;
 
-    // Últimos 10 acessos
     var sqlAcessos = `
         SELECT
             u.nome AS usuario,

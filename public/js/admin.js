@@ -9,37 +9,32 @@ if (usuarioLogado.tipo_usuario !== "admin") {
     window.location.href = "/index.html";
 }
 
-// Data atual no topo
 var agora = new Date();
 document.getElementById("data-atual").textContent =
     agora.toLocaleDateString("pt-BR", {
         weekday: "long", day: "2-digit", month: "long", year: "numeric"
     }).toUpperCase();
 
-
 fetch(urlDaAPI + "/admin/dados")
     .then(function (resposta) {
-        if (!resposta.ok) {
-            throw new Error("Erro ao buscar dados do admin: " + resposta.status);
-        }
+        if (!resposta.ok) throw new Error("Erro: " + resposta.status);
         return resposta.json();
     })
     .then(function (dados) {
         preencherKPIs(dados);
         preencherEstilos(dados.estilos);
         preencherBandas(dados.bandas);
-        preencherEstados(dados.estados);
+        renderizarGraficoEstados(dados.estados);
+        renderizarGraficoAcessos(dados.acessosPorPagina);
         preencherAcessos(dados.acessos);
-        renderizarGrafico(dados.acessosPorPagina);
     })
     .catch(function (erro) {
         console.log("Erro ao carregar dados do admin:", erro);
     });
 
-
 function preencherKPIs(dados) {
     document.getElementById("kpi-total-usuarios").textContent = dados.totalUsuarios;
-    document.getElementById("kpi-total-acessos").textContent  =
+    document.getElementById("kpi-total-acessos").textContent =
         dados.totalAcessos >= 1000
             ? (dados.totalAcessos / 1000).toFixed(1) + "k"
             : dados.totalAcessos;
@@ -47,7 +42,6 @@ function preencherKPIs(dados) {
     document.getElementById("kpi-pagina-top-count").textContent = dados.paginaTop.total + " acessos";
     document.getElementById("kpi-estados-ativos").textContent   = dados.estadosAtivos;
 }
-
 
 function preencherEstilos(estilos) {
     var container = document.getElementById("estilos-ranking");
@@ -59,16 +53,16 @@ function preencherEstilos(estilos) {
     }
 
     var max = estilos[0].total;
-    estilos.forEach(function (e, i) {
-        var pct = Math.round((e.total / max) * 100);
+    for (var i = 0; i < estilos.length; i++) {
+        var pct = Math.round((estilos[i].total / max) * 100);
         container.innerHTML +=
             '<div class="rank-item">' +
                 '<span class="rank-pos">' + (i + 1) + "</span>" +
-                '<span class="rank-nome">' + e.nome + "</span>" +
+                '<span class="rank-nome">' + estilos[i].nome + "</span>" +
                 '<div class="rank-track"><div class="rank-fill" style="width:' + pct + '%"></div></div>' +
-                '<span class="rank-val">' + e.total + "</span>" +
+                '<span class="rank-val">' + estilos[i].total + "</span>" +
             "</div>";
-    });
+    }
 }
 
 function preencherBandas(bandas) {
@@ -81,90 +75,107 @@ function preencherBandas(bandas) {
     }
 
     var max = bandas[0].total;
-    bandas.forEach(function (b, i) {
-        var pct = Math.round((b.total / max) * 100);
+    for (var i = 0; i < bandas.length; i++) {
+        var pct = Math.round((bandas[i].total / max) * 100);
         container.innerHTML +=
             '<div class="rank-item">' +
                 '<span class="rank-pos">' + (i + 1) + "</span>" +
-                '<span class="rank-nome">' + b.nome + "</span>" +
+                '<span class="rank-nome">' + bandas[i].nome + "</span>" +
                 '<div class="rank-track"><div class="rank-fill gold" style="width:' + pct + '%"></div></div>' +
-                '<span class="rank-val">' + b.total + "</span>" +
+                '<span class="rank-val">' + bandas[i].total + "</span>" +
             "</div>";
-    });
+    }
 }
 
-function preencherEstados(estados) {
-    var container = document.getElementById("estados-grid");
-    container.innerHTML = "";
+function renderizarGraficoEstados(estados) {
+    var canvas = document.getElementById("grafico-estados");
+    if (!canvas) return;
 
     if (!estados || estados.length === 0) {
-        container.innerHTML = '<span class="sem-dados">Sem dados ainda</span>';
+        canvas.parentNode.innerHTML =
+            '<span class="sem-dados" style="display:block;padding:2rem;text-align:center;">Sem dados de localização ainda</span>';
         return;
     }
 
-    var max = estados[0].total;
-    estados.forEach(function (e) {
-        var pct = Math.round((e.total / max) * 100);
-        container.innerHTML +=
-            '<div class="estado-item">' +
-                '<div class="estado-sigla">' + e.estado + "</div>" +
-                '<div class="estado-num">' + e.total + " usr</div>" +
-                '<div class="estado-bar"><div class="estado-bar-fill" style="width:' + pct + '%"></div></div>' +
-            "</div>";
-    });
-}
-
-
-function preencherAcessos(acessos) {
-    var tbody = document.getElementById("acessos-tbody");
-    tbody.innerHTML = "";
-
-    if (!acessos || acessos.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="sem-dados">Nenhum acesso registrado</td></tr>';
-        return;
+    var labels  = [];
+    var valores = [];
+    for (var i = 0; i < estados.length; i++) {
+        labels.push(estados[i].estado);
+        valores.push(estados[i].total);
     }
 
-    // Considera "recente" qualquer acesso das últimas 2 horas
-    var agora = new Date();
+    while (labels.length < 3) {
+        labels.push(labels[labels.length - 1]);
+        valores.push(valores[valores.length - 1]);
+    }
 
-    acessos.forEach(function (a) {
-        var dataAcesso    = new Date(a.acessado_em);
-        var diffHoras     = (agora - dataAcesso) / (1000 * 60 * 60);
-        var recente       = diffHoras < 2;
-        var dataFormatada = dataAcesso.toLocaleDateString("pt-BR") +
-            " " + dataAcesso.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-
-        tbody.innerHTML +=
-            "<tr>" +
-                '<td><span class="tdot' + (recente ? " on" : "") + '"></span>' +
-                    (recente ? "Recente" : "Normal") + "</td>" +
-                "<td>" + a.usuario + "</td>" +
-                '<td><span class="page-pill">' + a.pagina + "</span></td>" +
-                "<td>" + a.cidade + " · " + a.estado + "</td>" +
-                "<td>" + dataFormatada + "</td>" +
-            "</tr>";
+    new Chart(canvas, {
+        type: "radar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Usuários",
+                data: valores,
+                backgroundColor: "rgba(204, 26, 26, 0.15)",
+                borderColor: "rgba(204, 26, 26, 0.8)",
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(204, 26, 26, 1)",
+                pointBorderColor: "#111",
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: "#1c1c1c",
+                    borderColor: "#333",
+                    borderWidth: 1,
+                    titleColor: "#f0ece0",
+                    bodyColor: "#888",
+                    titleFont: { family: "'Share Tech Mono', monospace", size: 11 },
+                    bodyFont:  { family: "'Share Tech Mono', monospace", size: 11 },
+                    callbacks: {
+                        label: function (ctx) {
+                            return "  " + ctx.parsed.r + " usuário" + (ctx.parsed.r !== 1 ? "s" : "");
+                        }
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    backgroundColor: "transparent",
+                    grid:        { color: "rgba(255,255,255,0.05)" },
+                    angleLines:  { color: "rgba(255,255,255,0.05)" },
+                    pointLabels: {
+                        color: "#888",
+                        font: { family: "'Bebas Neue', sans-serif", size: 13 }
+                    },
+                    ticks: { display: false, stepSize: 1 }
+                }
+            }
+        }
     });
 }
 
-
-function renderizarGrafico(acessosPorPagina) {
+function renderizarGraficoAcessos(acessosPorPagina) {
     var canvas = document.getElementById("grafico-acessos");
     if (!canvas) return;
 
-    // Se não vier da API ainda, usa os dados do paginaTop que já temos
-    // A query completa de acessosPorPagina será adicionada no adminModel
-    var labels = [];
-    var valores = [];
+    if (!acessosPorPagina || acessosPorPagina.length === 0) {
+        canvas.parentNode.innerHTML =
+            '<span class="sem-dados" style="display:block;padding:2rem;text-align:center;">Nenhum acesso registrado ainda — navegue pelas páginas logado para popular</span>';
+        return;
+    }
 
-    if (acessosPorPagina && acessosPorPagina.length > 0) {
-        acessosPorPagina.forEach(function (item) {
-            labels.push(item.pagina);
-            valores.push(item.total);
-        });
-    } else {
-        // fallback com dados simulados caso o endpoint ainda não retorne esse campo
-        labels  = ["Música", "Vertentes", "História", "Home", "Sobre"];
-        valores = [312, 198, 154, 89, 45];
+    var labels  = [];
+    var valores = [];
+    for (var i = 0; i < acessosPorPagina.length; i++) {
+        labels.push(acessosPorPagina[i].pagina);
+        valores.push(acessosPorPagina[i].total);
     }
 
     new Chart(canvas, {
@@ -176,18 +187,17 @@ function renderizarGrafico(acessosPorPagina) {
                 data: valores,
                 backgroundColor: [
                     "rgba(204, 26, 26, 0.8)",
-                    "rgba(204, 26, 26, 0.6)",
-                    "rgba(204, 26, 26, 0.45)",
-                    "rgba(204, 26, 26, 0.3)",
-                    "rgba(204, 26, 26, 0.2)",
+                    "rgba(204, 26, 26, 0.65)",
+                    "rgba(204, 26, 26, 0.5)",
+                    "rgba(204, 26, 26, 0.35)",
+                    "rgba(204, 26, 26, 0.2)"
                 ],
                 borderColor: "rgba(204, 26, 26, 1)",
-                borderWidth: 1,
-                borderRadius: 0,
+                borderWidth: 1
             }]
         },
         options: {
-            indexAxis: "y",   // barras horizontais
+            indexAxis: "y",
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
@@ -209,7 +219,7 @@ function renderizarGrafico(acessosPorPagina) {
             },
             scales: {
                 x: {
-                    grid:  { color: "#1e1e1e" },
+                    grid: { color: "#1e1e1e" },
                     ticks: {
                         color: "#444",
                         font: { family: "'Share Tech Mono', monospace", size: 10 }
@@ -217,17 +227,45 @@ function renderizarGrafico(acessosPorPagina) {
                     border: { color: "#2a2a2a" }
                 },
                 y: {
-                    grid:  { display: false },
+                    grid: { display: false },
                     ticks: {
                         color: "#888",
-                        font: { family: "'Bebas Neue', sans-serif", size: 14 },
-                        letterSpacing: 2
+                        font: { family: "'Bebas Neue', sans-serif", size: 14 }
                     },
                     border: { color: "#2a2a2a" }
                 }
             }
         }
     });
+}
+
+function preencherAcessos(acessos) {
+    var tbody = document.getElementById("acessos-tbody");
+    tbody.innerHTML = "";
+
+    if (!acessos || acessos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="sem-dados">Nenhum acesso registrado — navegue pelas páginas logado para popular</td></tr>';
+        return;
+    }
+
+    var agora = new Date();
+    for (var i = 0; i < acessos.length; i++) {
+        var a             = acessos[i];
+        var dataAcesso    = new Date(a.acessado_em);
+        var diffHoras     = (agora - dataAcesso) / (1000 * 60 * 60);
+        var recente       = diffHoras < 2;
+        var dataFormatada = dataAcesso.toLocaleDateString("pt-BR") +
+            " " + dataAcesso.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+        tbody.innerHTML +=
+            "<tr>" +
+                '<td><span class="tdot' + (recente ? " on" : "") + '"></span>' + (recente ? "Recente" : "Normal") + "</td>" +
+                "<td>" + a.usuario + "</td>" +
+                '<td><span class="page-pill">' + a.pagina + "</span></td>" +
+                "<td>" + a.cidade + " · " + a.estado + "</td>" +
+                "<td>" + dataFormatada + "</td>" +
+            "</tr>";
+    }
 }
 
 function fazerLogout() {

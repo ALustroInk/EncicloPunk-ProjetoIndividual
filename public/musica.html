@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/stlyledash.css">
+  <link rel="stylesheet" href="/css/stylemusica.css">
   <link rel="shortcut icon" href="/imgs/logobranca.png" type="image/x-icon">
-  <script src="/js/index.js"></script>
-  <script>verificarLogin();</script>
-  <title>Recomendação Musical | ArqPunk</title>
+  <title>Música | ArqPunk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -24,84 +22,126 @@
         <a href="/index.html">Home</a>
         <a href="/historia.html">História</a>
         <a href="/vertentes.html">Vertentes</a>
-        <a href="/musica.html">Música</a>
-        <a href="/sobre.html">Sobre</a>
+        <a href="/musica.html" class="nav-ativo">Música</a>
       </nav>
-  
-      <a href="javascript:history.back()" class="back-link">← Voltar</a>
+      <div id="nav-perfil"></div>
     </section>
   </header>
 
-  <div class="shell">
+  <main>
 
-    <main class="content">
-
-      <div class="hero-bar">
-        <div>
-          <div class="hero-titulo">Você também pode gostar</div>
-          <div class="hero-sub">// recomendação musical de acordo com seu gosto</div>
-        </div>
-      </div>
-
-      <div class="cards-row">
-
-        <div class="card">
-          <div class="card-accent"></div>
-          <div class="card-header">
-            <span class="card-label">// vertentes</span>
-            <span class="card-count" id="badge-estilos">0</span>
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-esq">
+          <div class="hero-tag">// arquivo musical · personalizado</div>
+          <h1 class="hero-titulo">BANDAS QUE<br>VOCÊ VAI CURTIR</h1>
+          <p class="hero-desc">Recomendações geradas com base nos seus estilos favoritos e no que está bombando entre os usuários do ArqPunk.</p>
+          <div class="hero-estilos" id="hero-estilos">
+            <span class="hero-estilos-label">Seus estilos:</span>
+            <div id="estilos-tags"></div>
           </div>
-          <div class="card-title">Seus Estilos</div>
-          <div class="tags" id="estilos-lista"></div>
         </div>
-
-        <div class="card">
-          <div class="card-accent amarelo"></div>
-          <div class="card-header">
-            <span class="card-label">// bandas</span>
-            <span class="card-count" style="color:var(--amarelo)" id="badge-bandas">0</span>
+        <div class="hero-dir">
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="stat-estilos">—</div>
+            <div class="hero-stat-label">Estilos<br>favoritos</div>
           </div>
-          <div class="card-title">Suas Bandas</div>
-          <div class="tags" id="bandas-lista"></div>
+          <div class="hero-stat-div"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="stat-bandas">—</div>
+            <div class="hero-stat-label">Bandas no<br>seu arquivo</div>
+          </div>
+          <div class="hero-stat-div"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="stat-rec">—</div>
+            <div class="hero-stat-label">Novas<br>sugestões</div>
+          </div>
         </div>
-
       </div>
+    </div>
 
-
-      <div class="card" style="margin-bottom: 2rem;">
-        <div class="card-accent"></div>
-        <div class="card-header">
-          <span class="card-label">// recomendações · geradas com base no seu perfil</span>
+    <div class="secao">
+      <div class="secao-topo">
+        <div class="secao-label">// recomendações para você</div>
+        <h2 class="secao-titulo">Descubra Agora</h2>
+      </div>
+      <div class="rec-grid" id="rec-grid">
+        <div class="rec-loading">
+          <span class="loading-dot"></span>
+          Carregando recomendações...
         </div>
-        <div class="card-title">Bandas Que Você Vai Curtir</div>
-        <div class="rec-grid" id="rec-lista"></div>
       </div>
+    </div>
 
-      <div class="card">
-        <div class="card-accent amarelo"></div>
-        <div class="card-header">
-          <span class="card-label">// atividade recente</span>
+    <div class="secao secao-como">
+      <div class="secao-topo">
+        <div class="secao-label">// por trás do algoritmo</div>
+        <h2 class="secao-titulo">Como Calculamos</h2>
+      </div>
+      <div class="como-grid">
+        <div class="como-item">
+          <div class="como-num">01</div>
+          <div class="como-titulo">Mapeamento de Estilos</div>
+          <div class="como-desc">Identificamos todas as vertentes que você marcou como favoritas no cadastro.</div>
+          <div class="como-formula">
+            <span class="formula-label">entrada</span>
+            <span class="formula-val">usuario_vertente → vertente</span>
+          </div>
         </div>
-        <div class="card-title">Últimas Páginas Visitadas</div>
-        <div class="atividade-row" id="atividade-lista"></div>
+        <div class="como-item">
+          <div class="como-num">02</div>
+          <div class="como-titulo">Filtragem do Catálogo</div>
+          <div class="como-desc">Buscamos bandas que pertencem às suas vertentes e excluímos as que você já tem.</div>
+          <div class="como-formula">
+            <span class="formula-label">filtro</span>
+            <span class="formula-val">vertente IN (seus_estilos)<br>AND banda NOT IN (suas_bandas)</span>
+          </div>
+        </div>
+        <div class="como-item">
+          <div class="como-num">03</div>
+          <div class="como-titulo">Índice de Popularidade</div>
+          <div class="como-desc">Contamos quantos outros usuários favoritaram cada banda para calcular a relevância.</div>
+          <div class="como-formula">
+            <span class="formula-label">cálculo</span>
+            <span class="formula-val">popularidade =<br>COUNT(usuario_banda)</span>
+          </div>
+        </div>
+        <div class="como-item">
+          <div class="como-num">04</div>
+          <div class="como-titulo">Score de Compatibilidade</div>
+          <div class="como-desc">Combinamos posição no ranking e popularidade relativa para gerar o score final.</div>
+          <div class="como-formula">
+            <span class="formula-label">fórmula</span>
+            <span class="formula-val">score = (rank × 0.6)<br>+ (popularidade × 0.4)</span>
+          </div>
+        </div>
       </div>
+    </div>
 
-    </main>
-  </div>
+    <div class="secao">
+      <div class="secao-topo">
+        <div class="secao-label">// seu arquivo pessoal</div>
+        <h2 class="secao-titulo">Bandas que Você Já Tem</h2>
+      </div>
+      <div class="bandas-lista" id="bandas-lista">
+        <span class="vazio-txt">Carregando...</span>
+      </div>
+    </div>
+
+  </main>
 
   <footer class="footer">
     <div class="footer-left">
       <div class="footer-logo">Arq<span>Punk</span></div>
-      <p class="footer-desc">
-        Feito com amor · Nenhum direito reservado<br>
-        Copie, cole, rasgue e distribua.
-      </p>
+      <p class="footer-desc">Feito com amor · Nenhum direito reservado<br>Copie, cole, rasgue e distribua.</p>
     </div>
     <div class="footer-right">
       <span class="footer-diy">D.I.Y.</span>
     </div>
   </footer>
 
-  <script src="/js/dashboard.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="/js/musica.js"></script>
+
 </body>
 </html>

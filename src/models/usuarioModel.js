@@ -47,8 +47,16 @@ function salvarBandas(idusuario, bandasNomes) {
                 if (resultado.length > 0) {
                     return resultado[0].idbanda;
                 } else {
-                    return database.executar(`INSERT INTO banda (nome) VALUES ('${nome}');`)
-                        .then(function (res) { return res.insertId; });
+                    return database.executar(`
+                        SELECT v.idvertente FROM vertente v
+                        INNER JOIN banda b ON b.vertente_idvertente = v.idvertente
+                        WHERE b.nome LIKE '%${nome}%'
+                        LIMIT 1;
+                    `).then(function (vertRes) {
+                        var idVertente = vertRes.length > 0 ? vertRes[0].idvertente : 'NULL';
+                        return database.executar(`INSERT INTO banda (nome, vertente_idvertente) VALUES ('${nome}', ${idVertente});`)
+                            .then(function (res) { return res.insertId; });
+                    });
                 }
             })
             .then(function (idbanda) {
@@ -92,26 +100,23 @@ function buscarPerfil(idusuario) {
 }
 
 function buscarRecomendacoes(idusuario) {
-
     var sqlVertentes = `
         SELECT vertente_idvertente
         FROM usuario_vertente
         WHERE usuario_idusuario = ${idusuario};
     `;
-
     return database.executar(sqlVertentes)
         .then(function (vertentes) {
-
             if (vertentes.length === 0) {
                 var sqlPopulares = `
                     SELECT b.idbanda, b.nome,
                            v.nome AS vertente,
-                           COUNT(ub2.usuario_idusuario) AS popularidade
+                           COUNT(ub.usuario_idusuario) AS popularidade
                     FROM banda b
                         LEFT JOIN vertente v ON b.vertente_idvertente = v.idvertente
-                        LEFT JOIN usuario_banda ub2 ON b.idbanda = ub2.banda_idbanda
+                        LEFT JOIN usuario_banda ub ON b.idbanda = ub.banda_idbanda
                     WHERE b.idbanda NOT IN (
-                        SELECT banda_idbanda FROM usuario_banda WHERE usuario_idusuario = ${idusuario}
+                        SELECT COALESCE(banda_idbanda, 0) FROM usuario_banda WHERE usuario_idusuario = ${idusuario}
                     )
                     GROUP BY b.idbanda, b.nome, v.nome
                     ORDER BY popularidade DESC
@@ -120,27 +125,42 @@ function buscarRecomendacoes(idusuario) {
                 return database.executar(sqlPopulares);
             }
 
+            var listaIds = "";
+            for (var i = 0; i < vertentes.length; i++) {
+                if (i > 0) listaIds += ",";
+                listaIds += vertentes[i].vertente_idvertente;
+            }
+
             var sqlRecomendacoes = `
-                SELECT
-                    b.idbanda,
-                    b.nome,
-                    v.nome AS vertente,
-                    COUNT(ub2.usuario_idusuario) AS popularidade
+                SELECT b.idbanda, b.nome,
+                       v.nome AS vertente,
+                       COUNT(ub.usuario_idusuario) AS popularidade
                 FROM banda b
                     INNER JOIN vertente v ON b.vertente_idvertente = v.idvertente
-                    LEFT JOIN usuario_banda ub2 ON b.idbanda = ub2.banda_idbanda
-                WHERE
-                    b.idbanda NOT IN (
-                        SELECT banda_idbanda
-                        FROM usuario_banda
-                        WHERE usuario_idusuario = ${idusuario}
-                    )
+                    LEFT JOIN usuario_banda ub ON b.idbanda = ub.banda_idbanda
+                WHERE b.vertente_idvertente IN (${listaIds})
+                AND b.idbanda NOT IN (
+                    SELECT COALESCE(banda_idbanda, 0) FROM usuario_banda WHERE usuario_idusuario = ${idusuario}
+                )
                 GROUP BY b.idbanda, b.nome, v.nome
                 ORDER BY popularidade DESC
                 LIMIT 6;
             `;
-
             return database.executar(sqlRecomendacoes);
+        });
+}
+
+function registrarAcesso(idusuario, nomePagina) {
+
+    var sqlBuscaPagina = `SELECT idpagina FROM pagina WHERE nome = '${nomePagina}' LIMIT 1;`;
+    return database.executar(sqlBuscaPagina)
+        .then(function (resultado) {
+            if (resultado.length === 0) return; 
+            var idpagina = resultado[0].idpagina;
+            return database.executar(`
+                INSERT INTO acesso (usuario_idusuario, pagina_idpagina)
+                VALUES (${idusuario}, ${idpagina});
+            `);
         });
 }
 
@@ -150,5 +170,6 @@ module.exports = {
     salvarEstilos,
     salvarBandas,
     buscarPerfil,
-    buscarRecomendacoes
+    buscarRecomendacoes,
+    registrarAcesso
 };

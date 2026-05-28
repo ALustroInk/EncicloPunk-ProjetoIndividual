@@ -17,7 +17,6 @@
     transition: 0.2s linear; 
 }
 
-/* formatção site */
 section {
     padding: 3rem 1rem;
     margin: 0 auto;
@@ -30,25 +29,23 @@ body {
     color: var(--white);
 }
 
-/* EFEITO GRANULADO */
-  body::before {
+body::before {
     content: '';
     position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.080;
+    opacity: 0.08;
     pointer-events: none;
     z-index: 9999;
-  } 
+}
 
-/* HEADER */
+
 header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
     z-index: 99;
-    /*Esse var surge como a referência capturada no root*/
     border-bottom: var(--border);
     backdrop-filter: blur(3px);
 }
@@ -108,7 +105,6 @@ header {
     width: 100%; 
 }
 
-/* PERFIL LOGADO*/
 .btn-perfil {
     display: flex;
     align-items: center;
@@ -157,7 +153,6 @@ header {
     transition: opacity 0.2s, color 0.2s, font-size 0.2s;
 }
 
-/* DIV IMAGEM */
 .home-container1 {
     background: url("../imgs/banner.jpg");
     height: 100vh;
@@ -189,7 +184,6 @@ header {
     color: #0a0a0a;
 }
 
-/* CONTEUDO DENTRO DA FOLHA */
 .content h3 {
     color: #ba0000;
     font-size: 5rem;
@@ -216,7 +210,6 @@ header {
     margin-left: 8rem;
 }
 
-/* SECTIONS DE TITULO E SUBTITULO*/
   .section {
     padding: 5rem 4rem;
     position: relative;
@@ -246,7 +239,6 @@ header {
 }
 
 
-/* GRADE DIRECIONADORA */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -310,7 +302,6 @@ header {
     text-transform:none;
 }
 
-/* FOOTER */
 .footer {
   background: var(--grey);
   color: var(--white);
